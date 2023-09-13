@@ -1,0 +1,6 @@
+<section>
+  <input type="text" (change)="onInputChange($event)">
+  <ng-container *ngFor="let item of searchResults">
+    <div>{{item.id}}</div>
+  </ng-container>
+</section>
