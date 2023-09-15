@@ -3,11 +3,11 @@ import { ISearchResponse, IUser, IOrderType } from '../@core/models/github.model
 import { GithubService } from '../@core/services/github.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-github',
+  templateUrl: './github.component.html',
+  styleUrls: ['./github.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class GithubComponent implements OnInit {
 
   searchResults: IUser[] = [];
   keyword: string = '';
@@ -48,19 +48,6 @@ export class HomeComponent implements OnInit {
       })
   }
 
-  onChangeOrder() {
-    switch (this.orderType) {
-      case 'desc':
-        this.orderType = 'asc';
-        this.getResult(this.isScroll);
-        break
-
-      case 'asc':
-        this.orderType = 'desc';
-        this.getResult(this.isScroll);
-        break
-    }
-  }
 
   onReset() {
     this.searchResults = [];

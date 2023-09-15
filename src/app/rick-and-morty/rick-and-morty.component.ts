@@ -12,13 +12,18 @@ export class RickAndMortyComponent implements OnInit {
   loading: boolean = false;
   page: number = 0;
   rickAndMortyResults: ICharacterResult[] = [];
-  status: 'alive' | 'dead' | 'unknown' | '' = '';
+  selectedStatus: 'alive' | 'dead' | 'unknown' | '' = '';
+  status = [
+    { id: 1, name: 'alive' },
+    { id: 2, name: 'dead' },
+    { id: 3, name: 'unknown' },
+  ]
+
   constructor(private rickAndMorty: RickAndMortyService) { }
 
   ngOnInit(): void {
     this.getResult();
   }
-
 
   loadMore() {
     if (this.loading) return
@@ -29,7 +34,7 @@ export class RickAndMortyComponent implements OnInit {
 
   getResult() {
     this.loading = true;
-    this.rickAndMorty.getRickAndMorty(this.page, this.status).subscribe((result: IGetCharacter) => {
+    this.rickAndMorty.getRickAndMorty(this.page, this.selectedStatus).subscribe((result: IGetCharacter) => {
       this.rickAndMortyResults.push(...result.results);
       this.loading = false;
     },
@@ -38,6 +43,9 @@ export class RickAndMortyComponent implements OnInit {
       })
   }
 
-  onChangeOrder() {
+  onSelectStatus(event: { id: number, name: string }) {
+    this.selectedStatus = event.name as 'alive' | 'dead' | 'unknown';
+    this.rickAndMortyResults = [];
+    this.getResult();
   }
 }

@@ -1,9 +1,9 @@
-<main>
+<main class="main-container">
   <section>
-<button ></button>
+    <app-dropdown [list]="status" (onSelect)="onSelectStatus($event)"></app-dropdown>
   </section>
 
-  <div *ngIf="loading">Is Loadin...</div>
+  <img *ngIf="loading" src="assets/icons/6-dots-scale.svg" class="spiner">
 
   <section>
     <div infinitScroll (scrollEndReached)="loadMore()" class="table-container">

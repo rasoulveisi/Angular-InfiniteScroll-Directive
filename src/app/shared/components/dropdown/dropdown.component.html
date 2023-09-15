@@ -1,1 +1,12 @@
-<p>dropdown works!</p>
+<button id="dropdown" class="button" (click)="toggleDropdown()">
+  <div class="dropdown">
+    <label>
+      <span class="label">{{selectedLabel}}</span>
+      <img ngif src="assets/icons/chevron-down-outline.svg" class="icon">
+    </label>
+
+    <div *ngIf="isDropdownOpen" class="modal">
+      <span *ngFor="let item of list" (click)="onSelectItem(item)">{{item.name}}</span>
+    </div>
+  </div>
+</button>

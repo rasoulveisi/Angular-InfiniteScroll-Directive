@@ -1,0 +1,29 @@
+.table-container {
+  max-height: 720px;
+  overflow-y: auto;
+}
+
+// .table-header {
+//   display: flex;
+//   justify-content: space-between;
+//   font-weight: bold;
+// }
+
+// .table-row {
+//   display: flex;
+//   justify-content: space-between;
+// }
+
+// .column {
+//   width: 33.33%;
+// }
+
+.avatar {
+  height: 35px;
+  width: 35px;
+}
+
+.search-container {
+  display: flex;
+  gap: 8px;
+}
