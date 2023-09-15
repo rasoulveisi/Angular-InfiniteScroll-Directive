@@ -1,5 +1,5 @@
 .table-container {
-  max-height: 480px;
+  max-height: 720px;
   overflow-y: auto;
   width: 50%;
 }
@@ -13,13 +13,14 @@
 .table-row {
   display: flex;
   justify-content: space-between;
+  height: 50px;
 }
 
 .column {
-  width: 33.33%;
+  width: 48%;
 }
 
-.avatar {
-  height: 35px;
-  width: 35px;
+.id {
+  width: 4%;
+
 }

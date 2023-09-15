@@ -4,7 +4,6 @@
     <div>
       <button (click)="onSearchClicked()">Search</button>
       <button (click)="onChangeOrder()">Change Order</button>
-      <button (click)="loadMore()">LoadMore</button>
     </div>
   </section>
 
@@ -14,11 +13,14 @@
     <div infinitScroll (scrollEndReached)="loadMore()" class="table-container">
       <div class="table-header">
         <span class="column"> # </span>
+        <span class="column"> Avatar </span>
         <span class="column"> ID </span>
         <span class="column"> Login </span>
       </div>
       <div *ngFor="let item of searchResults; let i = index" class="table-row">
         <span class="column"> {{ i+1 }} </span>
+        <span class="column"> <img class=" avatar" [src]="item.avatar_url" alt="">
+        </span>
         <span class="column"> {{ item.id }} </span>
         <span class="column"> {{ item.login }} </span>
       </div>
