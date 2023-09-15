@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ISearchResponse, IUser } from '../@core/models/github.model';
+import { ISearchResponse, IUser, IOrderType } from '../@core/models/github.model';
 import { GithubService } from '../@core/services/github.service';
-import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -12,15 +11,58 @@ export class HomeComponent implements OnInit {
 
   searchResults: IUser[] = [];
   keyword: string = '';
-  constructor(private github: GithubService) {
+  loading: boolean = false;
+  page: number = 0;
+  perPage: number = 40;
+  orderType: IOrderType = 'desc';
+  isScroll: boolean = false;
+
+  constructor(private github: GithubService) { }
+
+  ngOnInit(): void { }
+
+  onSearchClicked() {
+    this.getResult(this.isScroll);
   }
 
-  ngOnInit(): void {
+  loadMore() {
+    if (this.loading) return
+    this.loading = true;
+    this.page++;
+    this.isScroll = true;
+    this.getResult(this.isScroll);
   }
 
-  onInputChange(event: any) {
-    this.keyword = event.target.value
+  getResult(isScroll: boolean) {
+    this.loading = true;
+    this.github.getSearchResult(this.keyword, this.page, this.perPage, this.orderType).subscribe((result: ISearchResponse) => {
+      if (isScroll) { this.searchResults.push(...result.items) } else {
+        this.searchResults = result.items;
+      }
+      this.loading = false;
+      this.isScroll = false;
+    },
+      error => {
+        this.loading = false;
+        this.isScroll = false;
+      })
+  }
 
-    this.github.getSearchResult(this.keyword).subscribe((x: ISearchResponse) => { this.searchResults = x.items })
+  onChangeOrder() {
+    switch (this.orderType) {
+      case 'desc':
+        this.orderType = 'asc';
+        this.getResult(this.isScroll);
+        break
+
+      case 'asc':
+        this.orderType = 'desc';
+        this.getResult(this.isScroll);
+        break
+    }
+  }
+
+  onReset() {
+    this.searchResults = [];
   }
 }

@@ -1,0 +1,20 @@
+.table-container {
+  max-height: 480px;
+  overflow-y: auto;
+  width: 50%;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.table-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.column {
+  width: 33.33%;
+}

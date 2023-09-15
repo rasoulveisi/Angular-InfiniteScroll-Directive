@@ -25,3 +25,5 @@ export interface IUser {
   events_url: string;
   site_admin: boolean;
 }
+
+export type IOrderType = 'desc' | 'asc'
